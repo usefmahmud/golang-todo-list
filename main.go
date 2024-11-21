@@ -63,6 +63,9 @@ main_loop:
 }
 
 func showTasks(list List, uncompleted bool) {
+	completedPercentage := getCompletedPercentage(list)
+	fmt.Printf("Your progress is %.0f%%\n", completedPercentage*100)
+
 	for idx, val := range list.tasks {
 		status := "NO"
 		if val.status {
@@ -78,6 +81,16 @@ func showTasks(list List, uncompleted bool) {
 		}
 	}
 	println("--------------")
+}
+
+func getCompletedPercentage(list List) float64 {
+	var completedCount float64 = 0
+	for _, val := range list.tasks {
+		if val.status {
+			completedCount++
+		}
+	}
+	return completedCount / float64(len(list.tasks))
 }
 
 func addTask(new_task Task) {
