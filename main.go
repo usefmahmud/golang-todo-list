@@ -43,14 +43,20 @@ main_loop:
 		case 2:
 			showTasks(ToDO, true)
 		case 3:
-		case 4:
-            println("what the task you want to add?")
-            var task_content string
-            fmt.Scanf("%s", &task_content)
+            println("enter the id number of the task you need to done")
 
-            addTask(&ToDO, createTask(task_content))
-            
-            println("Your task has been added successfully!")
+            var target_id int
+            fmt.Scanf("%d", &target_id)
+
+            doneTask(&ToDO, target_id)
+		case 4:
+			println("what the task you want to add?")
+			var task_content string
+			fmt.Scanf("%s", &task_content)
+
+			addTask(&ToDO, createTask(task_content))
+
+			println("Your task has been added successfully!")
 		case 5:
 			continue
 		case 6:
@@ -105,6 +111,10 @@ func delTask(task_id int) {
 
 }
 
-func doneTask(task_id int) {
+func doneTask(list *List, task_id int) {
+	if task_id >= len(list.tasks) {
+		return
+	}
 
+	list.tasks[task_id-1].status = true
 }
