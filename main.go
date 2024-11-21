@@ -38,18 +38,18 @@ main_loop:
 		fmt.Scanf("%d\n", &choice)
 
 		switch choice {
-		case 1:
+		case 1: // show all tasks
 			showTasks(ToDO, false)
-		case 2:
+		case 2: // show only uncompleted tasks
 			showTasks(ToDO, true)
-		case 3:
+		case 3: // mark task as done
             println("enter the id number of the task you need to done")
 
             var target_id int
             fmt.Scanf("%d", &target_id)
 
             doneTask(&ToDO, target_id)
-		case 4:
+		case 4: // add new task
 			println("what the task you want to add?")
 			var task_content string
 			fmt.Scanf("%s", &task_content)
@@ -57,12 +57,12 @@ main_loop:
 			addTask(&ToDO, createTask(task_content))
 
 			println("Your task has been added successfully!")
-		case 5:
+		case 5: // delete a task
 			continue
-		case 6:
+		case 6: // quit the app
 			println("END..")
 			break main_loop
-		default:
+		default: // wrong choice
 			println("your choice is wrong, try again")
 		}
 	}
