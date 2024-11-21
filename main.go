@@ -26,12 +26,6 @@ var choices = []string{
 func main() {
 	var ToDO List
 	ToDO.title = "My To-Do List"
-	ToDO.tasks = []Task{
-		{"the first task", false},
-		{"the second task", true},
-		{"the third task", false},
-		{"the fourh task", true},
-	}
 
 	fmt.Printf("Welcome To %s App\n", ToDO.title)
 main_loop:
@@ -54,7 +48,7 @@ main_loop:
             var task_content string
             fmt.Scanf("%s", &task_content)
 
-            addTask(ToDO, createTask(task_content))
+            addTask(&ToDO, createTask(task_content))
             
             println("Your task has been added successfully!")
 		case 5:
@@ -99,7 +93,7 @@ func getCompletedPercentage(list List) float64 {
 	return completedCount / float64(len(list.tasks))
 }
 
-func addTask(list List, new_task Task) {
+func addTask(list *List, new_task Task) {
     list.tasks = append(list.tasks, new_task)
 }
 
