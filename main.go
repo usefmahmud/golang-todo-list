@@ -5,7 +5,6 @@ import (
 )
 
 type Task struct {
-	id      int
 	content string
 	status  bool
 }
@@ -28,10 +27,10 @@ func main() {
 	var ToDO List
 	ToDO.title = "My To-Do List"
 	ToDO.tasks = []Task{
-		{1, "the first task", false},
-		{2, "the second task", true},
-		{3, "the third task", false},
-		{4, "the fourh task", true},
+		{"the first task", false},
+		{"the second task", true},
+		{"the third task", false},
+		{"the fourh task", true},
 	}
 
 	fmt.Printf("Welcome To %s App\n", ToDO.title)
@@ -51,6 +50,13 @@ main_loop:
 			showTasks(ToDO, true)
 		case 3:
 		case 4:
+            println("what the task you want to add?")
+            var task_content string
+            fmt.Scanf("%s", &task_content)
+
+            addTask(ToDO, createTask(task_content))
+            
+            println("Your task has been added successfully!")
 		case 5:
 			continue
 		case 6:
@@ -93,8 +99,12 @@ func getCompletedPercentage(list List) float64 {
 	return completedCount / float64(len(list.tasks))
 }
 
-func addTask(new_task Task) {
+func addTask(list List, new_task Task) {
+    list.tasks = append(list.tasks, new_task)
+}
 
+func createTask(content string) Task {
+    return Task{content, false}
 }
 
 func delTask(task_id int) {
