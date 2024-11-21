@@ -6,7 +6,7 @@ import (
 
 type Task struct {
 	id       int
-	contenct string
+	content string
 	status   bool
 }
 
